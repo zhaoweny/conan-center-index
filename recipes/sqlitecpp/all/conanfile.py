@@ -51,7 +51,7 @@ class SQLiteCppConan(ConanFile):
             self.output.warn("lint option is deprecated, do not use anymore")
 
     def requirements(self):
-        if self.options.sqlcipher:
+        if self.options.with_sqlcipher:
             self.requires("sqlcipher/4.4.3")
         else:
             self.requires("sqlite3/3.36.0")
@@ -91,7 +91,7 @@ class SQLiteCppConan(ConanFile):
         self._cmake.definitions["SQLITECPP_RUN_DOXYGEN"] = False
         self._cmake.definitions["SQLITECPP_BUILD_EXAMPLES"] = False
         self._cmake.definitions["SQLITECPP_BUILD_TESTS"] = False
-        if self.options.sqlcipher:
+        if self.options.with_sqlcipher:
             self._cmake.definitions["SQLITE_HAS_CODEC"] = True
             self._cmake.definitions["SQLITE_ENABLE_COLUMN_METADATA"] = False
         self._cmake.configure(build_folder=self._build_subfolder)
